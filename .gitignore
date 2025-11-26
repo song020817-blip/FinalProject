@@ -2,8 +2,7 @@
 *.csv
 *.xlsx
 
-# 머신러닝 모델 파일
-*.pkl
+!feature_columns.csv
 
 # 파이썬 캐시
 __pycache__/
