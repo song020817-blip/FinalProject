@@ -95,16 +95,16 @@ def get_nearest_station_info(lat, lon):
 
 # 🔁 proxy_data (주간변동률) 로드
 # main.py에서 만든 proxy_data.csv를 그대로 사용
-df_proxy = pd.read_csv("proxy_data.csv")
+"""df_proxy = pd.read_csv("proxy_data.csv")
 df_proxy["주차"] = pd.to_datetime(df_proxy["주차"])
 df_proxy = df_proxy.sort_values("주차")
 
 
 def get_proxy_value_from_ym(contract_ym: int) -> float:
-    """
-    계약년월(예: 202501) 기준으로
-    해당 월의 1일 날짜를 잡고, 그 이전 주차 중 가장 최근 '주간변동률' 사용
-    """
+    
+    #계약년월(예: 202501) 기준으로
+    #해당 월의 1일 날짜를 잡고, 그 이전 주차 중 가장 최근 '주간변동률' 사용
+    
     year = contract_ym // 100
     month = contract_ym % 100
     try:
@@ -116,7 +116,7 @@ def get_proxy_value_from_ym(contract_ym: int) -> float:
     df_tmp = df_proxy[df_proxy["주차"] <= contract_dt]
     if df_tmp.empty:
         return 0.0
-    return float(df_tmp.iloc[-1]["주간변동률"])
+    return float(df_tmp.iloc[-1]["주간변동률"])"""
 
 
 # =====================================
@@ -224,7 +224,7 @@ def predict_price_simple(data: HouseInputSimple):
     )
 
     # 4) 계약년월 → proxy_value
-    proxy_value = get_proxy_value_from_ym(data.contract_ym)
+    #proxy_value = get_proxy_value_from_ym(data.contract_ym)
 
     # 5) raw_dict 구성
     raw_dict = {
@@ -239,7 +239,7 @@ def predict_price_simple(data: HouseInputSimple):
         "경도": lon,
         "역까지거리(km)": station_dist,
         "학교까지거리(km)": univ_dist,
-        "주간변동률": proxy_value,
+        #"주간변동률": proxy_value,
     }
 
     # 시군구 더미
@@ -263,7 +263,7 @@ def predict_price_simple(data: HouseInputSimple):
         "nearest_station": station_name,
         "station_dist": station_dist,
         "univ_dist": univ_dist,
-        "proxy_value": proxy_value,
+        #"proxy_value": proxy_value,
     }
 
 
